@@ -1,0 +1,87 @@
+/* Font family for heading */
+@import url("https://fonts.googleapis.com/css2?family=Bitcount+Grid+Single:wght@100..900&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  font-weight: normal;
+  background-color: #1a1a1a;
+  color: #ffffff;
+  line-height: 1;
+}
+
+main {
+  max-width: 95rem;
+  margin: 0 auto;
+  padding: 4.8rem 3.2rem;
+}
+
+section {
+  margin-top: 6.4rem;
+}
+
+h1,
+h2,
+h3 {
+  font-weight: 700;
+  line-height: 1.02;
+  letter-spacing: -0.5px;
+}
+
+p {
+  line-height: 1.6;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  transition: all 0.3s ease-in-out;
+}
+
+form {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+label {
+  font-size: 2rem;
+  line-height: 1.2;
+  display: block;
+  margin-bottom: 1.2rem;
+  color: #1a1a1a;
+}
+input {
+  border: none;
+  outline: none;
+  width: 100%;
+  padding: 1.2rem;
+  border-radius: 100px;
+  box-shadow: 0 1.2rem 2.4rem rgba(0, 0, 0, 0.03);
+  background-color: #f7f7f7;
+}
+
+.heading--primary {
+  font-family: "Bitcount Grid Single", system-ui;
+  font-size: 4.4rem;
+  text-align: center;
+  margin-block: 3.2rem;
+}
+
+.primary--btn {
+  font-size: 2rem;
+  font-weight: 600;
+  align-self: end;
+}
+
+.primary--btn:hover {
+  transform: translateY(-1.2rem);
+}

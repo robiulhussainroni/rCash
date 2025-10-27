@@ -4,11 +4,51 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>rCash - Online Mobile Banking || Banking on your hand</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="css/general.css" />
     <link rel="stylesheet" href="css/main.css" />
     <link rel="stylesheet" href="css/responsive.css" />
   </head>
   <body>
+    <main class="app">
+      <h1 class="heading--primary">rCash</h1>
+      <section class="section--balance">
+        <div class="user--greeting">
+          Hello <span class="user--name">Roni</span> 👋
+        </div>
+        <div class="current--balance">
+          Your Balance : <span class="balance">$4539.25</span>
+        </div>
+      </section>
+      <section class="section--action">
+        <section class="section--cashout">
+          <form action="#">
+            <div class="cashout--agent-id">
+              <label for="agent-id">Enter Agent Id : </label>
+              <input
+                type="number"
+                name="number"
+                id="agent-id"
+                placeholder="23445454"
+              />
+            </div>
+            <div class="cashout--pin">
+              <label for="pin">Enter Your Pin : </label>
+              <input type="password" name="pin" id="pin" placeholder="6798" />
+            </div>
+            <button class="primary--btn cashout--btn">Cashout</button>
+          </form>
+        </section>
+        <section class="section--cashin">CASHIN</section>
+        <section class="section--sendmoney">SENDMONEY</section>
+      </section>
+      <section class="section--transaction"></section>
+    </main>
     <script src="js/app.js"></script>
   </body>
 </html>

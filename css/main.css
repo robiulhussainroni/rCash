@@ -1,0 +1,48 @@
+/* --- Section Balance */
+.section--balance {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background-color: #2a2a2a;
+  padding: 3.2rem;
+  border-radius: 100px;
+}
+
+.user--greeting,
+.current--balance {
+  font-size: 2rem;
+  line-height: 1.2;
+}
+
+.user--name,
+.balance {
+  font-style: italic;
+}
+
+/* --- Section Action */
+/* Section Cashout */
+.section--cashout {
+  background-color: #ff922b;
+  padding: 3.2rem;
+  box-shadow: 0 1.2rem 2.4rem rgba(255, 146, 43, 0.5);
+  border-radius: 100px;
+}
+
+.cashout--btn {
+  display: inline-block;
+  padding: 1.6rem 2.4rem;
+  border-radius: 11px;
+  background-color: #d9480f;
+  color: #fff;
+  box-shadow: 0 1.2rem 2.4rem rgba(217, 72, 15, 0.3);
+}
+
+.cashout--btn:hover {
+  background-color: #fff;
+  color: #d9480f;
+  box-shadow: 0 2.4rem 4.8rem rgba(217, 72, 15, 0.3);
+}
+
+.cashout--btn:active {
+  box-shadow: 0 0.6rem 1.2rem rgba(217, 72, 15, 0.3);
+}
