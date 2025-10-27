@@ -23,4 +23,4 @@
 
 ## Timeline
 
-- 28/10/2025 - I've created the repository
+- 28/10/2025 - I've created the repository, Started Designing Homepage - finished balance and cashout section
