@@ -46,3 +46,30 @@
 .cashout--btn:active {
   box-shadow: 0 0.6rem 1.2rem rgba(217, 72, 15, 0.3);
 }
+
+/* Section Send Money */
+.section--sendmoney {
+  background-color: #51cf66;
+  padding: 3.2rem;
+  box-shadow: 0 1.2rem 2.4rem rgba(81, 207, 102, 0.5);
+  border-radius: 100px;
+}
+
+.sendmoney--btn {
+  display: inline-block;
+  padding: 1.6rem 2.4rem;
+  border-radius: 11px;
+  background-color: #2f9e44;
+  color: #fff;
+  box-shadow: 0 1.2rem 2.4rem rgba(47, 158, 67, 0.3);
+}
+
+.sendmoney--btn:hover {
+  background-color: #fff;
+  color: #2f9e44;
+  box-shadow: 0 2.4rem 4.8rem rgba(47, 158, 67, 0.3);
+}
+
+.sendmoney--btn:active {
+  box-shadow: 0 0.6rem 1.2rem rgba(47, 158, 67, 0.3);
+}
