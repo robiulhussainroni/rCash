@@ -24,4 +24,5 @@
 ## Timeline
 
 - 28/10/2025 - I've created the repository, Started Designing Homepage - finished balance and cashout section
-- 29/10/2025 - I've added a new section in homepage, I've decided just to go with cash out and send money section for now, not thinking about cash in 
+- 29/10/2025 - I've added a new section in homepage, I've decided just to go with cash out and send money section for now, not thinking about cash in
+- 05/11/2025 - After long break, I'm back and finish the initial design of the application
