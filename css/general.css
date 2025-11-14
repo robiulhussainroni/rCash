@@ -85,3 +85,7 @@ input {
 .primary--btn:hover {
   transform: translateY(-1.2rem);
 }
+
+.hidden {
+  display: none;
+}
