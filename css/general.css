@@ -72,6 +72,8 @@ input {
 .heading--primary {
   font-family: "Bitcount Grid Single", system-ui;
   font-size: 4.4rem;
+  text-align: center;
+  margin-block: 2rem;
 }
 
 .primary--btn {
