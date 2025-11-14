@@ -1,20 +1,62 @@
 /* Header */
 .header {
-  display: flex;
+  /* display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-around; */
   padding: 3.2rem;
   border-bottom: 3px solid #2f2b2b;
 }
 
 .login--form {
-  gap: 3rem;
+  justify-content: center;
+  align-items: center;
+  gap: 3.2rem;
 }
 
 .login--form label {
+  font-style: italic;
   color: #fff;
-  margin-bottom: 0.6rem;
+  margin-bottom: 1rem;
   font-size: 1.6rem;
+  font-weight: 500;
+}
+
+.login--form input {
+  width: 100%;
+  outline: 3px solid #51cf66;
+  box-shadow: 0 1.2rem 2.4rem #51cf66;
+  transition: all 0.3s ease-in-out;
+}
+
+.login--form input:hover {
+  transform: scale(1.1);
+}
+
+.login--form input::placeholder {
+  font-size: 1.6rem;
+  color: #777;
+}
+
+.login--btn {
+  background-color: #000;
+  box-shadow: 0 1.2rem 2.4rem #111;
+  outline: 1px solid #51cf66;
+  padding: 1.2rem 2.4rem;
+  border-radius: 100px;
+  font-weight: 600;
+  font-size: 2rem;
+  color: #fff;
+  align-self: end;
+}
+
+.login--btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 2.4rem 4.8rem #111;
+}
+
+.login--btn:active {
+  transform: scale(0.75);
+  box-shadow: 0 0.6rem 1.2rem #111;
 }
 
 /* --- Section Balance */
