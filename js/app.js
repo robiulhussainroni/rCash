@@ -73,14 +73,12 @@ const closeEl = document.querySelector(".close--icon");
 const logInFormEl = document.querySelector(".login--form");
 
 openEl.addEventListener("click", function () {
-  logInFormEl.style.display = "flex";
   logInFormEl.classList.add("mobile--login-form");
   openEl.classList.add("hidden");
   closeEl.classList.remove("hidden");
 });
 
 closeEl.addEventListener("click", function () {
-  logInFormEl.style.display = "none";
   logInFormEl.classList.remove("mobile--login-form");
   openEl.classList.remove("hidden");
   closeEl.classList.add("hidden");
