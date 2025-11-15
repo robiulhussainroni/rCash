@@ -57,8 +57,32 @@
   box-shadow: 0 0.6rem 1.2rem #111;
 }
 
+.mobile--login-form {
+  display: flex !important;
+  background-color: #2f2b2b;
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 97vw;
+  height: 100vh;
+  padding: 3rem;
+  /* flex-direction: column;
+  align-items: center;
+  justify-content: center; */
+}
+
+/* .mobile--login-form label {
+  color: #111;
+} */
+
+.mobile--login-form .login--btn {
+  align-self: center;
+}
+
 /* Mobile Menu */
 .mobile--menu {
+  z-index: 2;
   border: 2px solid #2f9e44;
   position: absolute;
   right: 5%;
@@ -66,7 +90,7 @@
 }
 
 .menu--icon {
-  font-size: 2.4rem;
+  font-size: 3.2rem;
 }
 
 .mobile--menu:hover {
