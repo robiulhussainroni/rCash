@@ -19,12 +19,24 @@
       <h1 class="heading--primary">rCash</h1>
       <form action="#" class="login--form">
         <div>
-          <label for="user" class="login--user">Username :</label>
-          <input type="text" name="user" id="user" placeholder="RH" />
+          <label for="login--user-name" class="login--user">Username :</label>
+          <input
+            type="text"
+            name="login--user-name"
+            id="login--user-name"
+            placeholder="RH"
+          />
         </div>
         <div>
-          <label for="pin" class="login--pin">Enter your pin :</label>
-          <input type="password" name="pin" id="pin" placeholder="6798" />
+          <label for="login--user-pin" class="login--pin"
+            >Enter your pin :</label
+          >
+          <input
+            type="password"
+            name="login--user-pin"
+            id="login--user-pin"
+            placeholder="6798"
+          />
         </div>
         <button class="login--btn">Log in</button>
       </form>
@@ -38,7 +50,7 @@
       </div>
     </header>
 
-    <main class="app">
+    <main class="app hidden">
       <section class="section--balance">
         <div class="user--greeting">
           Hello <span class="user--name">Roni</span> 👋

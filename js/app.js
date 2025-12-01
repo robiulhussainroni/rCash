@@ -83,3 +83,5 @@ closeEl.addEventListener("click", function () {
   openEl.classList.remove("hidden");
   closeEl.classList.add("hidden");
 });
+
+// Handling Login
