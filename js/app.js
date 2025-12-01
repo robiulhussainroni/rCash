@@ -92,6 +92,7 @@ const loginUserPinEl = document.getElementById("login--user-pin");
 const loginBtnEl = document.querySelector(".login--btn");
 const appEl = document.querySelector(".app");
 const userNameEl = document.querySelector(".user--name");
+const balanceEl = document.querySelector(".balance");
 
 let currentUser;
 loginBtnEl.addEventListener("click", function (e) {
@@ -104,6 +105,7 @@ loginBtnEl.addEventListener("click", function (e) {
       currentUser = acc;
       appEl.classList.remove("hidden");
       userNameEl.textContent = currentUser.owner;
+      balanceEl.textContent = displayBalance(currentUser);
     }
   });
   loginUserNameEl.value = "";
@@ -111,3 +113,12 @@ loginBtnEl.addEventListener("click", function (e) {
   loginUserNameEl.blur();
   loginUserPinEl.blur();
 });
+
+// Calculate Balance
+const displayBalance = (acc) => {
+  const {
+    movementsInfo: { movements },
+  } = acc;
+  const totalBalance = movements.reduce((mov, accum) => accum + mov, 0);
+  return totalBalance;
+};
