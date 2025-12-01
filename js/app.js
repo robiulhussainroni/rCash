@@ -19,6 +19,7 @@ const account1 = {
       "2025-06-10T16:15:00.000Z",
     ],
   },
+  userName: "MT", // Note : It may be changed later, and can be done dynamically
   currency: "USD",
   locale: "en-US",
 };
@@ -38,7 +39,7 @@ const account2 = {
       "2025-07-18T09:05:00.000Z",
     ],
   },
-
+  userName: "SM",
   currency: "USD",
   locale: "en-US",
 };
@@ -59,7 +60,7 @@ const account3 = {
       "2025-07-01T10:10:00.000Z",
     ],
   },
-
+  userName: "OB",
   currency: "USD",
   locale: "en-US",
 };
@@ -85,3 +86,28 @@ closeEl.addEventListener("click", function () {
 });
 
 // Handling Login
+// Selectors
+const loginUserNameEl = document.getElementById("login--user-name");
+const loginUserPinEl = document.getElementById("login--user-pin");
+const loginBtnEl = document.querySelector(".login--btn");
+const appEl = document.querySelector(".app");
+const userNameEl = document.querySelector(".user--name");
+
+let currentUser;
+loginBtnEl.addEventListener("click", function (e) {
+  e.preventDefault();
+  accounts.find((acc) => {
+    if (
+      acc.userName === loginUserNameEl.value &&
+      acc.pin === +loginUserPinEl.value
+    ) {
+      currentUser = acc;
+      appEl.classList.remove("hidden");
+      userNameEl.textContent = currentUser.owner;
+    }
+  });
+  loginUserNameEl.value = "";
+  loginUserPinEl.value = "";
+  loginUserNameEl.blur();
+  loginUserPinEl.blur();
+});
