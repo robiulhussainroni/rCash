@@ -19,6 +19,7 @@ const account1 = {
       "2025-06-10T16:15:00.000Z",
     ],
   },
+  userName: "MT", // Note : It may be changed later, and can be done dynamically
   currency: "USD",
   locale: "en-US",
 };
@@ -38,7 +39,7 @@ const account2 = {
       "2025-07-18T09:05:00.000Z",
     ],
   },
-
+  userName: "SM",
   currency: "USD",
   locale: "en-US",
 };
@@ -59,7 +60,7 @@ const account3 = {
       "2025-07-01T10:10:00.000Z",
     ],
   },
-
+  userName: "OB",
   currency: "USD",
   locale: "en-US",
 };
@@ -83,3 +84,68 @@ closeEl.addEventListener("click", function () {
   openEl.classList.remove("hidden");
   closeEl.classList.add("hidden");
 });
+
+// Handling Login
+// Selectors
+const loginUserNameEl = document.getElementById("login--user-name");
+const loginUserPinEl = document.getElementById("login--user-pin");
+const loginBtnEl = document.querySelector(".login--btn");
+const appEl = document.querySelector(".app");
+const userNameEl = document.querySelector(".user--name");
+const balanceEl = document.querySelector(".balance");
+const sectionTransactionEl = document.querySelector(".section--transactions");
+
+let currentUser;
+loginBtnEl.addEventListener("click", function (e) {
+  e.preventDefault();
+  accounts.find((acc) => {
+    if (
+      acc.userName === loginUserNameEl.value &&
+      acc.pin === +loginUserPinEl.value
+    ) {
+      currentUser = acc;
+      appEl.classList.remove("hidden");
+      userNameEl.textContent = currentUser.owner;
+      balanceEl.textContent = displayBalance(currentUser);
+      displayTransactions(currentUser);
+    }
+  });
+  loginUserNameEl.value = "";
+  loginUserPinEl.value = "";
+  loginUserNameEl.blur();
+  loginUserPinEl.blur();
+});
+
+// Calculate Balance
+const displayBalance = (acc) => {
+  const {
+    movementsInfo: { movements },
+  } = acc;
+  const totalBalance = movements.reduce((mov, accum) => accum + mov, 0);
+  return totalBalance;
+};
+
+// Showing Transactions
+// Selector
+
+const displayTransactions = (acc) => {
+  sectionTransactionEl.innerHTML = "";
+  const {
+    movementsInfo: { movements },
+    movementsInfo: { movementsDates },
+  } = acc;
+  movements.forEach((mov, i) => {
+    const type = mov > 0 ? "Cahsin" : "Cashout";
+    const typeAttr = mov > 0 ? "sm" : "co";
+    const newDate = new Date(movementsDates[i]);
+    const day = newDate.getDate();
+    const month = newDate.getMonth() + 1;
+    const year = newDate.getFullYear();
+    const html = `<div class="transaction">
+          <span class="transaction--type transaction--${typeAttr}">${type}</span>
+          <span class="transaction--date">${day}/${month}/${year}</span>
+          <span class="transaction--amount">${mov}</span>
+        </div>`;
+    sectionTransactionEl.insertAdjacentHTML("afterbegin", html);
+  });
+};
