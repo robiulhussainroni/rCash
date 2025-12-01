@@ -31,3 +31,4 @@ DD/MM/YY
 - 11/11/2025 - Added login form and logout timer in the UI, do some html tweak
 - 14/11/2025 - Redesign the login form + Make the app responsive, worked on mobile navigation (No JS yet)
 - 15/11/2025 - Set the fake data for the application + Worked on mobile navigation logic
+- 01/12/2025 - Worked on login (not real login), worked on calculating balance, worked on showing transaction
