@@ -104,6 +104,7 @@ loginBtnEl.addEventListener("click", function (e) {
       userNameEl.textContent = currentUser.owner;
       balanceEl.textContent = displayBalance(currentUser);
       displayTransactions(currentUser);
+      actionMsgEl.classList.add("hidden");
     }
   });
   // Selector
@@ -173,16 +174,16 @@ const agentAccount = account1;
 
 cashOutBtnEl.addEventListener("click", function (e) {
   e.preventDefault();
-  console.log(currentUser);
   const {
     movementsInfo: { movements },
     movementsInfo: { movementsDates },
   } = currentUser;
-  console.log(movements, movementsDates);
+  const {
+    movementsInfo: { movements: agentMovements },
+    movementsInfo: { movementsDates: agentMovementsDates },
+  } = agentAccount;
   const currentBalance = displayBalance(currentUser);
   const currentDate = new Date().toISOString();
-  console.log(agentAccount);
-  console.log(agentIdEl.value);
   if (
     agentIdEl.value === agentAccount.agentId &&
     +cashOutPinEl.value === currentUser.pin &&
@@ -190,6 +191,8 @@ cashOutBtnEl.addEventListener("click", function (e) {
   ) {
     movements.push(+-cashOutAmountEl.value);
     movementsDates.push(currentDate);
+    agentMovements.push(+cashOutAmountEl.value);
+    agentMovementsDates.push(currentDate);
     balanceEl.textContent = displayBalance(currentUser);
     displayTransactions(currentUser);
     actionMsgEl.classList.remove("hidden");
