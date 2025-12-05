@@ -5,18 +5,14 @@
 const account1 = {
   owner: "Michael Thompson",
   pin: 3333,
-  agentId: "AGT-1023", // This user is an agent
+  agentId: "LM-6798", // This user is an agent
   movementsInfo: {
-    movements: [1200, -200, 340, -500, 1500, -100, 700, -50],
+    movements: [1200, 340, 1500, 700],
     movementsDates: [
       "2025-11-15T10:12:45.000Z",
       "2025-11-14T09:30:00.000Z",
       "2025-11-13T15:45:00.000Z",
       "2025-10-20T10:30:00.000Z",
-      "2025-09-15T12:00:00.000Z",
-      "2025-08-05T14:20:00.000Z",
-      "2025-07-22T09:45:00.000Z",
-      "2025-06-10T16:15:00.000Z",
     ],
   },
   userName: "MT", // Note : It may be changed later, and can be done dynamically
@@ -108,8 +104,15 @@ loginBtnEl.addEventListener("click", function (e) {
       userNameEl.textContent = currentUser.owner;
       balanceEl.textContent = displayBalance(currentUser);
       displayTransactions(currentUser);
+      actionMsgEl.classList.add("hidden");
     }
   });
+  // Selector
+  const sectionCashoutEl = document.querySelector(".section--cashout");
+
+  if (currentUser === account1) {
+    sectionCashoutEl.classList.add("hidden");
+  }
   loginUserNameEl.value = "";
   loginUserPinEl.value = "";
   loginUserNameEl.blur();
@@ -149,3 +152,57 @@ const displayTransactions = (acc) => {
     sectionTransactionEl.insertAdjacentHTML("afterbegin", html);
   });
 };
+
+// Handling Cashout
+// Cashout should be done with an agent - Have to provide an agent id
+// Amount should be positive
+// Should have exact or more than the amount on balance
+// Amount will cut from current balance and it will add on agent account
+// Agent can't do cashout - as there are just only one agent (account 1) (Already done line 109-114)
+
+// Selector
+const agentIdEl = document.getElementById("agent--id");
+const cashOutPinEl = document.getElementById("cashout--pin");
+const cashOutAmountEl = document.getElementById("cashout--amount");
+const cashOutBtnEl = document.querySelector(".cashout--btn");
+const actionMsgEl = document.querySelector(".action--msg");
+const actionTypeEl = document.querySelector(".action--type");
+const actionMoneyEl = document.querySelector(".action--money");
+
+// Agent Account
+const agentAccount = account1;
+
+cashOutBtnEl.addEventListener("click", function (e) {
+  e.preventDefault();
+  const {
+    movementsInfo: { movements },
+    movementsInfo: { movementsDates },
+  } = currentUser;
+  const {
+    movementsInfo: { movements: agentMovements },
+    movementsInfo: { movementsDates: agentMovementsDates },
+  } = agentAccount;
+  const currentBalance = displayBalance(currentUser);
+  const currentDate = new Date().toISOString();
+  if (
+    agentIdEl.value === agentAccount.agentId &&
+    +cashOutPinEl.value === currentUser.pin &&
+    +cashOutAmountEl.value <= currentBalance
+  ) {
+    movements.push(+-cashOutAmountEl.value);
+    movementsDates.push(currentDate);
+    agentMovements.push(+cashOutAmountEl.value);
+    agentMovementsDates.push(currentDate);
+    balanceEl.textContent = displayBalance(currentUser);
+    displayTransactions(currentUser);
+    actionMsgEl.classList.remove("hidden");
+    actionTypeEl.textContent = "Cashout";
+    actionMoneyEl.textContent = cashOutAmountEl.value;
+  }
+  agentIdEl.value = "";
+  agentIdEl.blur();
+  cashOutAmountEl.value = "";
+  cashOutAmountEl.blur();
+  cashOutPinEl.value = "";
+  cashOutPinEl.blur();
+});

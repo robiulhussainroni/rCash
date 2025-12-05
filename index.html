@@ -62,42 +62,71 @@
       <section class="section--action">
         <section class="section--cashout">
           <form action="#">
-            <div class="cashout--agent-id">
-              <label for="agent-id">Enter Agent Id : </label>
+            <div>
+              <label for="agent--id">Enter Agent Id : </label>
               <input
-                type="number"
-                name="number"
-                id="agent-id"
+                type="text"
+                name="text"
+                id="agent--id"
                 placeholder="23445454"
               />
             </div>
-            <div class="user--pin">
-              <label for="pin">Enter Your Pin : </label>
-              <input type="password" name="pin" id="pin" placeholder="6798" />
+            <div>
+              <label for="cashout--amount">Enter the amount : </label>
+              <input
+                type="text"
+                name="cashout--amount"
+                id="cashout--amount"
+                placeholder="125.35"
+              />
+            </div>
+            <div>
+              <label for="cashout--pin">Enter Your Pin : </label>
+              <input
+                type="password"
+                name="cashout--pin"
+                id="cashout--pin"
+                placeholder="6798"
+              />
             </div>
             <button class="primary--btn cashout--btn">Cashout</button>
           </form>
         </section>
-        <section class="section--sendmoney">
+        <section class="section--cashin">
           <form action="#">
-            <div class="sendmoney--user-name">
-              <label for="username">Enter User Name : </label>
+            <div>
+              <label for="cashin--username">Enter User Name : </label>
               <input
                 type="number"
                 name="number"
-                id="username"
+                id="cashin--username"
                 placeholder="CWR"
               />
             </div>
-            <div class="user--pin">
-              <label for="pin">Enter Your Pin : </label>
-              <input type="password" name="pin" id="pin" placeholder="6798" />
+            <div>
+              <label for="cashin--amount">Enter the amount : </label>
+              <input
+                type="text"
+                name="cashin--amount"
+                id="cashin--amount"
+                placeholder="79.99"
+              />
             </div>
-            <button class="primary--btn sendmoney--btn">Cashin</button>
+            <div>
+              <label for="cashin--user-pin">Enter Your Pin : </label>
+              <input
+                type="password"
+                name="cashin--user-pin"
+                id="cashin--userpin"
+                placeholder="6798"
+              />
+            </div>
+            <button class="primary--btn cashin--btn">Cashin</button>
           </form>
         </section>
-        <p class="action--msg">
-          Send Money of <span class="action--money">$100.25</span> has completed
+        <p class="action--msg hidden">
+          <span class="action--type">Send Money</span>
+          <span class="action--money">$100.25</span> has completed
         </p>
       </section>
       <section class="section--transactions">
