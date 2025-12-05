@@ -5,7 +5,7 @@
 const account1 = {
   owner: "Michael Thompson",
   pin: 3333,
-  agentId: "AGT-1023", // This user is an agent
+  agentId: "LM-6798", // This user is an agent
   movementsInfo: {
     movements: [1200, 340, 1500, 700],
     movementsDates: [
@@ -164,15 +164,42 @@ const agentIdEl = document.getElementById("agent--id");
 const cashOutPinEl = document.getElementById("cashout--pin");
 const cashOutAmountEl = document.getElementById("cashout--amount");
 const cashOutBtnEl = document.querySelector(".cashout--btn");
+const actionMsgEl = document.querySelector(".action--msg");
+const actionTypeEl = document.querySelector(".action--type");
+const actionMoneyEl = document.querySelector(".action--money");
 
 // Agent Account
 const agentAccount = account1;
 
-const cashout = (acc) => {
+cashOutBtnEl.addEventListener("click", function (e) {
+  e.preventDefault();
+  console.log(currentUser);
   const {
-    movementInfo: { movements },
-  } = acc;
-};
-
-// Works needs to be done
-// I didn't add any input field for amount ! LOL
+    movementsInfo: { movements },
+    movementsInfo: { movementsDates },
+  } = currentUser;
+  console.log(movements, movementsDates);
+  const currentBalance = displayBalance(currentUser);
+  const currentDate = new Date().toISOString();
+  console.log(agentAccount);
+  console.log(agentIdEl.value);
+  if (
+    agentIdEl.value === agentAccount.agentId &&
+    +cashOutPinEl.value === currentUser.pin &&
+    +cashOutAmountEl.value <= currentBalance
+  ) {
+    movements.push(+-cashOutAmountEl.value);
+    movementsDates.push(currentDate);
+    balanceEl.textContent = displayBalance(currentUser);
+    displayTransactions(currentUser);
+    actionMsgEl.classList.remove("hidden");
+    actionTypeEl.textContent = "Cashout";
+    actionMoneyEl.textContent = cashOutAmountEl.value;
+  }
+  agentIdEl.value = "";
+  agentIdEl.blur();
+  cashOutAmountEl.value = "";
+  cashOutAmountEl.blur();
+  cashOutPinEl.value = "";
+  cashOutPinEl.blur();
+});

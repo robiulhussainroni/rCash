@@ -63,11 +63,11 @@
         <section class="section--cashout">
           <form action="#">
             <div>
-              <label for="agent-id">Enter Agent Id : </label>
+              <label for="agent--id">Enter Agent Id : </label>
               <input
-                type="number"
-                name="number"
-                id="agent-id"
+                type="text"
+                name="text"
+                id="agent--id"
                 placeholder="23445454"
               />
             </div>
@@ -124,8 +124,9 @@
             <button class="primary--btn cashin--btn">Cashin</button>
           </form>
         </section>
-        <p class="action--msg">
-          Send Money of <span class="action--money">$100.25</span> has completed
+        <p class="action--msg hidden">
+          <span class="action--type">Send Money</span> of
+          <span class="action--money">$100.25</span> has completed
         </p>
       </section>
       <section class="section--transactions">
