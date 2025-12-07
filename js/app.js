@@ -154,7 +154,6 @@ const displayTransactions = (acc) => {
 };
 
 // Handling Cashout
-
 // Selector
 const agentIdEl = document.getElementById("agent--id");
 const cashOutPinEl = document.getElementById("cashout--pin");
@@ -200,4 +199,33 @@ cashOutBtnEl.addEventListener("click", function (e) {
   cashOutAmountEl.blur();
   cashOutPinEl.value = "";
   cashOutPinEl.blur();
+});
+
+// Handling Cashin
+// Selector
+const cashinUserNameEl = document.getElementById("cashin--username");
+const cashinAmountEl = document.getElementById("cashin--amount");
+const cashinUserPinEl = document.getElementById("cashin--userpin");
+const cashinBtnEl = document.querySelector(".cashin--btn");
+
+cashinBtnEl.addEventListener("click", function (e) {
+  e.preventDefault();
+  const {
+    movementsInfo: { movements },
+    movementsInfo: { movementsDates },
+  } = currentUser;
+  const currentDate = new Date().toISOString();
+  if (
+    cashinUserNameEl.value === currentUser.userName &&
+    +cashinAmountEl.value > 0 &&
+    +cashinUserPinEl.value === currentUser.pin
+  ) {
+    movements.push(+cashinAmountEl.value);
+    movementsDates.push(currentDate);
+    balanceEl.textContent = displayBalance(currentUser);
+    displayTransactions(currentUser);
+    actionMsgEl.classList.remove("hidden");
+    actionTypeEl.textContent = "Cashin";
+    actionMoneyEl.textContent = cashinAmountEl.value;
+  }
 });
