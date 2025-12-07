@@ -154,11 +154,6 @@ const displayTransactions = (acc) => {
 };
 
 // Handling Cashout
-// Cashout should be done with an agent - Have to provide an agent id
-// Amount should be positive
-// Should have exact or more than the amount on balance
-// Amount will cut from current balance and it will add on agent account
-// Agent can't do cashout - as there are just only one agent (account 1) (Already done line 109-114)
 
 // Selector
 const agentIdEl = document.getElementById("agent--id");
