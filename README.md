@@ -33,3 +33,4 @@ DD/MM/YY
 - 15/11/2025 - Set the fake data for the application + Worked on mobile navigation logic
 - 01/12/2025 - Worked on login (not real login), worked on calculating balance, worked on showing transaction
 - 05/12/2025 - Fixed some HTML Class and Content Issue, Worked on Cashout
+- 07/12/2025 - Worked on Cashin, Started working on Timer couldn't make it then remove the codes
