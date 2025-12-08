@@ -129,7 +129,6 @@ const displayBalance = (acc) => {
 };
 
 // Showing Transactions
-// Selector
 
 const displayTransactions = (acc) => {
   sectionTransactionEl.innerHTML = "";
@@ -138,8 +137,8 @@ const displayTransactions = (acc) => {
     movementsInfo: { movementsDates },
   } = acc;
   movements.forEach((mov, i) => {
-    const type = mov > 0 ? "Cahsin" : "Cashout";
-    const typeAttr = mov > 0 ? "sm" : "co";
+    const type = mov > 0 ? "IN" : "OUT";
+    const typeAttr = mov > 0 ? "in" : "out";
     const newDate = new Date(movementsDates[i]);
     const day = newDate.getDate();
     const month = newDate.getMonth() + 1;
@@ -228,4 +227,57 @@ cashinBtnEl.addEventListener("click", function (e) {
     actionTypeEl.textContent = "Cashin";
     actionMoneyEl.textContent = cashinAmountEl.value;
   }
+  cashinAmountEl.value = "";
+  cashinAmountEl.blur();
+  cashinUserPinEl.value = "";
+  cashinUserPinEl.blur();
+  cashinUserNameEl.value = "";
+  cashinUserNameEl.blur();
+});
+
+// Handling Send Money
+// Selector
+const sendMoneyUserNameEl = document.getElementById("sendmoney--username");
+const sendMoneyAmountEl = document.getElementById("sendmoney--amount");
+const sendMoneyUserPinEl = document.getElementById("sendmoney--userpin");
+const sendMoneyBtnEl = document.querySelector(".sendmoney--btn");
+
+sendMoneyBtnEl.addEventListener("click", function (e) {
+  e.preventDefault();
+  const reciverAcc = accounts.find(
+    (acc) => acc.userName === sendMoneyUserNameEl.value
+  );
+  const {
+    movementsInfo: { movements },
+    movementsInfo: { movementsDates },
+  } = currentUser;
+  const {
+    movementsInfo: { movements: reciverMovements },
+    movementsInfo: { movementsDates: reciverMovementsDates },
+  } = reciverAcc;
+  const currentBalance = displayBalance(currentUser);
+  const currentDate = new Date().toISOString();
+
+  if (
+    reciverAcc &&
+    +sendMoneyAmountEl.value > 0 &&
+    +sendMoneyAmountEl.value < currentBalance &&
+    +sendMoneyUserPinEl.value === currentUser.pin
+  ) {
+    movements.push(-+sendMoneyAmountEl.value);
+    movementsDates.push(currentDate);
+    reciverMovements.push(+sendMoneyAmountEl.value);
+    reciverMovementsDates.push(currentDate);
+    balanceEl.textContent = displayBalance(currentUser);
+    displayTransactions(currentUser);
+    actionMsgEl.classList.remove("hidden");
+    actionTypeEl.textContent = "Send Money";
+    actionMoneyEl.textContent = sendMoneyAmountEl.value;
+  }
+  sendMoneyAmountEl.value = "";
+  sendMoneyAmountEl.blur();
+  sendMoneyUserPinEl.value = "";
+  sendMoneyUserPinEl.blur();
+  sendMoneyUserNameEl.value = "";
+  sendMoneyUserNameEl.blur();
 });

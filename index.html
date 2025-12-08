@@ -124,6 +124,38 @@
             <button class="primary--btn cashin--btn">Cashin</button>
           </form>
         </section>
+        <section class="section--sendmoney">
+          <form action="#">
+            <div>
+              <label for="cashin--username">Reciver user name : </label>
+              <input
+                type="text"
+                name="sendmoney--username"
+                id="sendmoney--username"
+                placeholder="AWS"
+              />
+            </div>
+            <div>
+              <label for="sendmoney--amount">Enter the amount : </label>
+              <input
+                type="number"
+                name="sendmoney--amount"
+                id="sendmoney--amount"
+                placeholder="79.99"
+              />
+            </div>
+            <div>
+              <label for="sendmoney--user-pin">Enter Your Pin : </label>
+              <input
+                type="password"
+                name="sendmoney--user-pin"
+                id="sendmoney--userpin"
+                placeholder="6798"
+              />
+            </div>
+            <button class="primary--btn sendmoney--btn">Send Money</button>
+          </form>
+        </section>
         <p class="action--msg hidden">
           <span class="action--type">Send Money</span>
           <span class="action--money">$100.25</span> has completed
@@ -131,12 +163,17 @@
       </section>
       <section class="section--transactions">
         <div class="transaction">
-          <span class="transaction--type transaction--sm">Send Money</span>
+          <span class="transaction--type transaction--in">Cashin</span>
           <span class="transaction--date">12/12/2024</span>
           <span class="transaction--amount">$3000.24</span>
         </div>
         <div class="transaction">
-          <span class="transaction--type transaction--co">Cashout</span>
+          <span class="transaction--type transaction--out">Cashout</span>
+          <span class="transaction--date">11/10/2024</span>
+          <span class="transaction--amount">$1000.24</span>
+        </div>
+        <div class="transaction">
+          <span class="transaction--type transaction--in">Send Money</span>
           <span class="transaction--date">11/10/2024</span>
           <span class="transaction--amount">$1000.24</span>
         </div>
