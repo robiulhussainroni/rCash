@@ -90,6 +90,7 @@ const appEl = document.querySelector(".app");
 const userNameEl = document.querySelector(".user--name");
 const balanceEl = document.querySelector(".balance");
 const sectionTransactionEl = document.querySelector(".section--transactions");
+const warningMsgEl = document.querySelector(".warning--msg");
 
 let currentUser;
 loginBtnEl.addEventListener("click", function (e) {
@@ -105,8 +106,21 @@ loginBtnEl.addEventListener("click", function (e) {
       balanceEl.textContent = displayBalance(currentUser);
       displayTransactions(currentUser);
       actionMsgEl.classList.add("hidden");
+      warningMsgEl.classList.add("hidden");
     }
   });
+  if (!currentUser) {
+    // Warning Message
+    warningMsgEl.textContent = "Wrong Information";
+    warningMsgEl.style.backgroundColor = "red";
+    warningMsgEl.style.bottom = "25vh";
+    warningMsgEl.style.right = "50vw";
+    loginUserNameEl.addEventListener("click", function () {
+      warningMsgEl.textContent = "Login to get started";
+      warningMsgEl.style.backgroundColor = "#000";
+      warningMsgEl.style.right = "0vw";
+    });
+  }
   // Selector
   const sectionCashoutEl = document.querySelector(".section--cashout");
 
@@ -192,6 +206,28 @@ cashOutBtnEl.addEventListener("click", function (e) {
     actionTypeEl.textContent = "Cashout";
     actionMoneyEl.textContent = cashOutAmountEl.value;
   }
+  if (agentIdEl.value !== agentAccount.agentId) {
+    agentIdEl.classList.add("error");
+    setTimeout(function () {
+      agentIdEl.classList.remove("error");
+    }, 2000);
+  }
+  if (
+    +cashOutAmountEl.value > currentBalance ||
+    +cashOutAmountEl.value !== currentBalance
+  ) {
+    cashOutAmountEl.classList.add("error");
+    setTimeout(function () {
+      cashOutAmountEl.classList.remove("error");
+    }, 2000);
+  }
+  if (+cashOutPinEl.value !== currentUser.pin) {
+    cashOutPinEl.classList.add("error");
+    setTimeout(function () {
+      cashOutPinEl.classList.remove("error");
+    }, 2000);
+  }
+
   agentIdEl.value = "";
   agentIdEl.blur();
   cashOutAmountEl.value = "";
@@ -227,6 +263,24 @@ cashinBtnEl.addEventListener("click", function (e) {
     actionTypeEl.textContent = "Cashin";
     actionMoneyEl.textContent = cashinAmountEl.value;
   }
+  if (cashinUserNameEl.value !== currentUser.userName) {
+    cashinUserNameEl.classList.add("error");
+    setTimeout(function () {
+      cashinUserNameEl.classList.remove("error");
+    }, 2000);
+  }
+  if (cashinAmountEl.value <= 0) {
+    cashinAmountEl.classList.add("error");
+    setTimeout(function () {
+      cashinAmountEl.classList.remove("error");
+    }, 2000);
+  }
+  if (+cashinUserPinEl.value !== currentUser.pin) {
+    cashinUserPinEl.classList.add("error");
+    setTimeout(function () {
+      cashinUserPinEl.classList.remove("error");
+    }, 2000);
+  }
   cashinAmountEl.value = "";
   cashinAmountEl.blur();
   cashinUserPinEl.value = "";
@@ -251,19 +305,21 @@ sendMoneyBtnEl.addEventListener("click", function (e) {
     movementsInfo: { movements },
     movementsInfo: { movementsDates },
   } = currentUser;
-  const {
-    movementsInfo: { movements: reciverMovements },
-    movementsInfo: { movementsDates: reciverMovementsDates },
-  } = reciverAcc;
+
   const currentBalance = displayBalance(currentUser);
   const currentDate = new Date().toISOString();
 
   if (
     reciverAcc &&
+    reciverAcc !== currentUser &&
     +sendMoneyAmountEl.value > 0 &&
     +sendMoneyAmountEl.value < currentBalance &&
     +sendMoneyUserPinEl.value === currentUser.pin
   ) {
+    const {
+      movementsInfo: { movements: reciverMovements },
+      movementsInfo: { movementsDates: reciverMovementsDates },
+    } = reciverAcc;
     movements.push(-+sendMoneyAmountEl.value);
     movementsDates.push(currentDate);
     reciverMovements.push(+sendMoneyAmountEl.value);
@@ -273,6 +329,27 @@ sendMoneyBtnEl.addEventListener("click", function (e) {
     actionMsgEl.classList.remove("hidden");
     actionTypeEl.textContent = "Send Money";
     actionMoneyEl.textContent = sendMoneyAmountEl.value;
+  }
+  if (!reciverAcc || reciverAcc === currentUser) {
+    sendMoneyUserNameEl.classList.add("error");
+    setTimeout(function () {
+      sendMoneyUserNameEl.classList.remove("error");
+    }, 2000);
+  }
+  if (
+    +sendMoneyAmountEl.value <= 0 ||
+    +sendMoneyAmountEl.value > currentBalance
+  ) {
+    sendMoneyAmountEl.classList.add("error");
+    setTimeout(function () {
+      sendMoneyAmountEl.classList.remove("error");
+    }, 2000);
+  }
+  if (+sendMoneyUserPinEl.value !== currentUser.pin) {
+    sendMoneyUserPinEl.classList.add("error");
+    setTimeout(function () {
+      sendMoneyUserPinEl.classList.remove("error");
+    }, 2000);
   }
   sendMoneyAmountEl.value = "";
   sendMoneyAmountEl.blur();

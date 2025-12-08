@@ -89,3 +89,9 @@ input {
 .hidden {
   display: none;
 }
+
+.error {
+  border: 5px solid rgb(206, 3, 3) !important;
+  color: rgb(206, 3, 3);
+  transition: all 0.3s ease-in-out;
+}
