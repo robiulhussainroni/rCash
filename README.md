@@ -34,3 +34,4 @@ DD/MM/YY
 - 01/12/2025 - Worked on login (not real login), worked on calculating balance, worked on showing transaction
 - 05/12/2025 - Fixed some HTML Class and Content Issue, Worked on Cashout
 - 07/12/2025 - Worked on Cashin, Started working on Timer couldn't make it then remove the codes
+- 08/12/2025 - Finally Added Send Money Section which I removed from initial plan, also done with all the Send Money Functionality
