@@ -35,3 +35,4 @@ DD/MM/YY
 - 05/12/2025 - Fixed some HTML Class and Content Issue, Worked on Cashout
 - 07/12/2025 - Worked on Cashin, Started working on Timer couldn't make it then remove the codes
 - 08/12/2025 - Finally Added Send Money Section which I removed from initial plan, also done with all the Send Money Functionality + while adding error messages I figured out some critical bugs on the app, if the condition doesn't found reciver account I can't destructure it also I found a user can do send money to his account, Solved these bug also add error messages and style input field for wrong information
+- 09/12/2025 - Fixed a bug where If I login with the agent account the cashout section removed from other normal accounts too but I wanted it to just removed for the agent account, as there are just one agent account on my application + started working on sorting the transaction but couldn't make it
