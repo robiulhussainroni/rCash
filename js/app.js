@@ -127,6 +127,9 @@ loginBtnEl.addEventListener("click", function (e) {
   if (currentUser === account1) {
     sectionCashoutEl.classList.add("hidden");
   }
+  if (currentUser !== account1) {
+    sectionCashoutEl.classList.remove("hidden");
+  }
   loginUserNameEl.value = "";
   loginUserPinEl.value = "";
   loginUserNameEl.blur();
@@ -212,10 +215,7 @@ cashOutBtnEl.addEventListener("click", function (e) {
       agentIdEl.classList.remove("error");
     }, 2000);
   }
-  if (
-    +cashOutAmountEl.value > currentBalance ||
-    +cashOutAmountEl.value !== currentBalance
-  ) {
+  if (+cashOutAmountEl.value > currentBalance) {
     cashOutAmountEl.classList.add("error");
     setTimeout(function () {
       cashOutAmountEl.classList.remove("error");
