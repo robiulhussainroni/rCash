@@ -127,6 +127,9 @@ loginBtnEl.addEventListener("click", function (e) {
   if (currentUser === account1) {
     sectionCashoutEl.classList.add("hidden");
   }
+  if (currentUser !== account1) {
+    sectionCashoutEl.classList.remove("hidden");
+  }
   loginUserNameEl.value = "";
   loginUserPinEl.value = "";
   loginUserNameEl.blur();
@@ -212,10 +215,7 @@ cashOutBtnEl.addEventListener("click", function (e) {
       agentIdEl.classList.remove("error");
     }, 2000);
   }
-  if (
-    +cashOutAmountEl.value > currentBalance ||
-    +cashOutAmountEl.value !== currentBalance
-  ) {
+  if (+cashOutAmountEl.value > currentBalance) {
     cashOutAmountEl.classList.add("error");
     setTimeout(function () {
       cashOutAmountEl.classList.remove("error");
@@ -358,3 +358,13 @@ sendMoneyBtnEl.addEventListener("click", function (e) {
   sendMoneyUserNameEl.value = "";
   sendMoneyUserNameEl.blur();
 });
+
+// Sorting Transaction
+// Selector
+const sortTransactionBtnEl = document.querySelector(".sort--transaction");
+
+sortTransactionBtnEl.addEventListener("click", function () {});
+
+// Todos
+// 1. Rewatch sorting movements and dates lecture and implement it on the project
+// 2. Rewatch timer lecture and implement it on the project
