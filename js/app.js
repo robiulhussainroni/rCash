@@ -358,3 +358,13 @@ sendMoneyBtnEl.addEventListener("click", function (e) {
   sendMoneyUserNameEl.value = "";
   sendMoneyUserNameEl.blur();
 });
+
+// Sorting Transaction
+// Selector
+const sortTransactionBtnEl = document.querySelector(".sort--transaction");
+
+sortTransactionBtnEl.addEventListener("click", function () {});
+
+// Todos
+// 1. Rewatch sorting movements and dates lecture and implement it on the project
+// 2. Rewatch timer lecture and implement it on the project
