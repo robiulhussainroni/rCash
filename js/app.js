@@ -146,24 +146,33 @@ const displayBalance = (acc) => {
 };
 
 // Showing Transactions
-
-const displayTransactions = (acc) => {
+const displayTransactions = (acc, sort = false) => {
   sectionTransactionEl.innerHTML = "";
   const {
     movementsInfo: { movements },
     movementsInfo: { movementsDates },
   } = acc;
-  movements.forEach((mov, i) => {
-    const type = mov > 0 ? "IN" : "OUT";
-    const typeAttr = mov > 0 ? "in" : "out";
-    const newDate = new Date(movementsDates[i]);
+  console.log(movements);
+  console.log(movementsDates);
+  const combinedMovDate = movements.map((mov, i) => ({
+    movement: mov,
+    movementDate: movementsDates[i],
+  }));
+  const mov = sort
+    ? combinedMovDate.sort((a, b) => a.movement - b.movement)
+    : combinedMovDate;
+  mov.forEach((obj) => {
+    const { movement, movementDate } = obj;
+    const type = movement > 0 ? "IN" : "OUT";
+    const typeAttr = movement > 0 ? "in" : "out";
+    const newDate = new Date(movementDate);
     const day = newDate.getDate();
     const month = newDate.getMonth() + 1;
     const year = newDate.getFullYear();
     const html = `<div class="transaction">
           <span class="transaction--type transaction--${typeAttr}">${type}</span>
           <span class="transaction--date">${day}/${month}/${year}</span>
-          <span class="transaction--amount">${mov}</span>
+          <span class="transaction--amount">${movement}</span>
         </div>`;
     sectionTransactionEl.insertAdjacentHTML("afterbegin", html);
   });
@@ -362,9 +371,12 @@ sendMoneyBtnEl.addEventListener("click", function (e) {
 // Sorting Transaction
 // Selector
 const sortTransactionBtnEl = document.querySelector(".sort--transaction");
-
-sortTransactionBtnEl.addEventListener("click", function () {});
+let sorted = false;
+sortTransactionBtnEl.addEventListener("click", function () {
+  displayTransactions(currentUser, !sorted);
+  sorted = !sorted;
+  console.log(sorted);
+});
 
 // Todos
-// 1. Rewatch sorting movements and dates lecture and implement it on the project
 // 2. Rewatch timer lecture and implement it on the project
