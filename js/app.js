@@ -111,19 +111,27 @@ loginBtnEl.addEventListener("click", function (e) {
       openEl.classList.remove("hidden");
       closeEl.classList.add("hidden");
     }
-    if (acc.userName !== loginUserNameEl.value) {
-      loginUserNameEl.classList.add("error");
-      setTimeout(function () {
-        loginUserNameEl.classList.remove("error");
-      }, 2000);
-    }
-    if (acc.pin !== +loginUserPinEl.value) {
-      loginUserPinEl.classList.add("error");
-      setTimeout(function () {
-        loginUserPinEl.classList.remove("error");
-      }, 2000);
-    }
   });
+  const checkUserName = accounts.some(
+    (acc) => acc.userName === loginUserNameEl.value
+  );
+
+  if (!checkUserName) {
+    loginUserNameEl.classList.add("error");
+    setTimeout(function () {
+      loginUserNameEl.classList.remove("error");
+    }, 2000);
+  }
+  const checkUserPin = accounts.some(
+    (acc) => acc.pin === +loginUserPinEl.value
+  );
+
+  if (!checkUserPin) {
+    loginUserPinEl.classList.add("error");
+    setTimeout(function () {
+      loginUserPinEl.classList.remove("error");
+    }, 2000);
+  }
   if (!currentUser) {
     // Warning Message
     warningMsgEl.textContent = "Wrong Information";
