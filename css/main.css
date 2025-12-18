@@ -186,7 +186,7 @@
 /* Action Message */
 .action--msg {
   position: absolute;
-  right: -15%;
+  right: 15%;
   bottom: -15%;
   background-color: #adff2f;
   border-radius: 9px;
