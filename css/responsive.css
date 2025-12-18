@@ -21,6 +21,12 @@
     padding: 2rem;
   }
 
+  .section--cashout form,
+  .section--cashin form,
+  .section--sendmoney form {
+    display: flex;
+  }
+
   .header {
     display: flex;
     align-items: center;
