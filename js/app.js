@@ -107,6 +107,21 @@ loginBtnEl.addEventListener("click", function (e) {
       displayTransactions(currentUser);
       actionMsgEl.classList.add("hidden");
       warningMsgEl.classList.add("hidden");
+      logInFormEl.classList.remove("mobile--login-form");
+      openEl.classList.remove("hidden");
+      closeEl.classList.add("hidden");
+    }
+    if (acc.userName !== loginUserNameEl.value) {
+      loginUserNameEl.classList.add("error");
+      setTimeout(function () {
+        loginUserNameEl.classList.remove("error");
+      }, 2000);
+    }
+    if (acc.pin !== +loginUserPinEl.value) {
+      loginUserPinEl.classList.add("error");
+      setTimeout(function () {
+        loginUserPinEl.classList.remove("error");
+      }, 2000);
     }
   });
   if (!currentUser) {
@@ -375,7 +390,6 @@ let sorted = false;
 sortTransactionBtnEl.addEventListener("click", function () {
   displayTransactions(currentUser, !sorted);
   sorted = !sorted;
-  console.log(sorted);
 });
 
 // Todos
