@@ -4,14 +4,6 @@
     max-width: 70rem;
     padding: 2.4rem;
   }
-
-  .section--cashout form,
-  .section--cashin form,
-  .section--sendmoney form {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3.4rem;
-  }
 }
 
 /* 736px */
@@ -25,6 +17,8 @@
   .section--cashin form,
   .section--sendmoney form {
     display: flex;
+    align-items: center;
+    justify-content: space-around;
   }
 
   .header {

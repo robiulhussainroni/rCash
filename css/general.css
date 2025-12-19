@@ -47,9 +47,9 @@ button {
 }
 
 form {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3.4rem;
 }
 
 label {
@@ -60,6 +60,7 @@ label {
   color: #1a1a1a;
 }
 input {
+  font-size: 2rem;
   border: none;
   outline: none;
   width: 100%;
