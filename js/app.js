@@ -10,12 +10,12 @@ const account1 = {
     movements: [1200, 340, 1500, 700],
     movementsDates: [
       "2025-11-15T10:12:45.000Z",
-      "2025-11-14T09:30:00.000Z",
-      "2025-11-13T15:45:00.000Z",
-      "2025-10-20T10:30:00.000Z",
+      "2025-12-13T12:20:00.000Z",
+      "2025-12-18T15:45:00.000Z",
+      "2025-12-19T12:41:35.766Z",
     ],
   },
-  userName: "MT", // Note : It may be changed later, and can be done dynamically
+  userName: "MT",
   currency: "USD",
   locale: "en-US",
 };
@@ -27,17 +27,17 @@ const account2 = {
   movementsInfo: {
     movements: [500, -50, 200, -100, 750, -20],
     movementsDates: [
-      "2025-11-15T11:20:00.000Z", // Today
-      "2025-11-14T14:10:00.000Z", // Yesterday
+      "2025-11-15T11:20:00.000Z",
+      "2025-11-14T14:10:00.000Z",
       "2025-11-10T16:45:00.000Z",
-      "2025-09-10T11:30:00.000Z",
-      "2025-08-22T14:10:00.000Z",
-      "2025-07-18T09:05:00.000Z",
+      "2025-12-13T12:20:00.000Z",
+      "2025-12-18T15:45:00.000Z",
+      "2025-12-19T12:41:35.766Z",
     ],
   },
   userName: "SM",
-  currency: "USD",
-  locale: "en-US",
+  currency: "EUR",
+  locale: "de-DE",
 };
 
 // Non-agent account
@@ -48,17 +48,17 @@ const account3 = {
   movementsInfo: {
     movements: [300, -20, 100, -50, 400, -30],
     movementsDates: [
-      "2025-11-14T08:15:00.000Z", // Yesterday
-      "2025-11-13T12:30:00.000Z", // 2 days ago
+      "2025-11-14T08:15:00.000Z",
+      "2025-11-13T12:30:00.000Z",
       "2025-11-05T09:10:00.000Z",
-      "2025-09-05T12:20:00.000Z",
-      "2025-08-15T15:45:00.000Z",
-      "2025-07-01T10:10:00.000Z",
+      "2025-12-13T12:20:00.000Z",
+      "2025-12-18T15:45:00.000Z",
+      "2025-12-19T12:41:35.766Z",
     ],
   },
   userName: "OB",
-  currency: "USD",
-  locale: "en-US",
+  currency: "BDT",
+  locale: "bn-BD",
 };
 
 const accounts = [account1, account2, account3];
@@ -103,7 +103,11 @@ loginBtnEl.addEventListener("click", function (e) {
       currentUser = acc;
       appEl.classList.remove("hidden");
       userNameEl.textContent = currentUser.owner;
-      balanceEl.textContent = displayBalance(currentUser);
+      const showBalance = displayBalance(currentUser);
+      balanceEl.textContent = Intl.NumberFormat(acc.locale, {
+        style: "currency",
+        currency: acc.currency,
+      }).format(showBalance);
       displayTransactions(currentUser);
       actionMsgEl.classList.add("hidden");
       warningMsgEl.classList.add("hidden");
@@ -175,8 +179,6 @@ const displayTransactions = (acc, sort = false) => {
     movementsInfo: { movements },
     movementsInfo: { movementsDates },
   } = acc;
-  console.log(movements);
-  console.log(movementsDates);
   const combinedMovDate = movements.map((mov, i) => ({
     movement: mov,
     movementDate: movementsDates[i],
@@ -188,14 +190,29 @@ const displayTransactions = (acc, sort = false) => {
     const { movement, movementDate } = obj;
     const type = movement > 0 ? "IN" : "OUT";
     const typeAttr = movement > 0 ? "in" : "out";
-    const newDate = new Date(movementDate);
-    const day = newDate.getDate();
-    const month = newDate.getMonth() + 1;
-    const year = newDate.getFullYear();
+    // const newDate = new Date(movementDate);
+    // const day = newDate.getDate();
+    // const month = newDate.getMonth() + 1;
+    // const year = newDate.getFullYear();
+    let formatDate;
+    const daysPassed = Math.trunc(
+      (new Date() - new Date(movementDate)) / 1000 / 60 / 60 / 24
+    );
+    if (daysPassed === 0) formatDate = "Today";
+    else if (daysPassed === 1) formatDate = "Yesterday";
+    else if (daysPassed <= 7) formatDate = `${daysPassed} days ago`;
+    else if (daysPassed > 7)
+      formatDate = Intl.DateTimeFormat(currentUser.locale).format(
+        new Date(movementDate)
+      );
+    const formatMovement = Intl.NumberFormat(acc.locale, {
+      style: "currency",
+      currency: acc.currency,
+    }).format(movement);
     const html = `<div class="transaction">
           <span class="transaction--type transaction--${typeAttr}">${type}</span>
-          <span class="transaction--date">${day}/${month}/${year}</span>
-          <span class="transaction--amount">${movement}</span>
+          <span class="transaction--date">${formatDate}</span>
+          <span class="transaction--amount">${formatMovement}</span>
         </div>`;
     sectionTransactionEl.insertAdjacentHTML("afterbegin", html);
   });
@@ -235,7 +252,11 @@ cashOutBtnEl.addEventListener("click", function (e) {
     movementsDates.push(currentDate);
     agentMovements.push(+cashOutAmountEl.value);
     agentMovementsDates.push(currentDate);
-    balanceEl.textContent = displayBalance(currentUser);
+    const showBalance = displayBalance(currentUser);
+    balanceEl.textContent = Intl.NumberFormat(currentUser.locale, {
+      style: "currency",
+      currency: currentUser.currency,
+    }).format(showBalance);
     displayTransactions(currentUser);
     actionMsgEl.classList.remove("hidden");
     actionTypeEl.textContent = "Cashout";
@@ -289,7 +310,11 @@ cashinBtnEl.addEventListener("click", function (e) {
   ) {
     movements.push(+cashinAmountEl.value);
     movementsDates.push(currentDate);
-    balanceEl.textContent = displayBalance(currentUser);
+    const showBalance = displayBalance(currentUser);
+    balanceEl.textContent = Intl.NumberFormat(currentUser.locale, {
+      style: "currency",
+      currency: currentUser.currency,
+    }).format(showBalance);
     displayTransactions(currentUser);
     actionMsgEl.classList.remove("hidden");
     actionTypeEl.textContent = "Cashin";
@@ -356,7 +381,11 @@ sendMoneyBtnEl.addEventListener("click", function (e) {
     movementsDates.push(currentDate);
     reciverMovements.push(+sendMoneyAmountEl.value);
     reciverMovementsDates.push(currentDate);
-    balanceEl.textContent = displayBalance(currentUser);
+    const showBalance = displayBalance(currentUser);
+    balanceEl.textContent = Intl.NumberFormat(currentUser.locale, {
+      style: "currency",
+      currency: currentUser.currency,
+    }).format(showBalance);
     displayTransactions(currentUser);
     actionMsgEl.classList.remove("hidden");
     actionTypeEl.textContent = "Send Money";
