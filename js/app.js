@@ -92,7 +92,7 @@ const balanceEl = document.querySelector(".balance");
 const sectionTransactionEl = document.querySelector(".section--transactions");
 const warningMsgEl = document.querySelector(".warning--msg");
 
-let currentUser;
+let currentUser, timerLogOut;
 loginBtnEl.addEventListener("click", function (e) {
   e.preventDefault();
   accounts.find((acc) => {
@@ -114,6 +114,8 @@ loginBtnEl.addEventListener("click", function (e) {
       logInFormEl.classList.remove("mobile--login-form");
       openEl.classList.remove("hidden");
       closeEl.classList.add("hidden");
+      if (timerLogOut) clearInterval(timerLogOut);
+      timerLogOut = logOutTimer();
     }
   });
   const checkUserName = accounts.some(
@@ -190,10 +192,6 @@ const displayTransactions = (acc, sort = false) => {
     const { movement, movementDate } = obj;
     const type = movement > 0 ? "IN" : "OUT";
     const typeAttr = movement > 0 ? "in" : "out";
-    // const newDate = new Date(movementDate);
-    // const day = newDate.getDate();
-    // const month = newDate.getMonth() + 1;
-    // const year = newDate.getFullYear();
     let formatDate;
     const daysPassed = Math.trunc(
       (new Date() - new Date(movementDate)) / 1000 / 60 / 60 / 24
@@ -261,6 +259,8 @@ cashOutBtnEl.addEventListener("click", function (e) {
     actionMsgEl.classList.remove("hidden");
     actionTypeEl.textContent = "Cashout";
     actionMoneyEl.textContent = cashOutAmountEl.value;
+    clearInterval(timerLogOut);
+    timerLogOut = logOutTimer();
   }
   if (agentIdEl.value !== agentAccount.agentId) {
     agentIdEl.classList.add("error");
@@ -319,6 +319,8 @@ cashinBtnEl.addEventListener("click", function (e) {
     actionMsgEl.classList.remove("hidden");
     actionTypeEl.textContent = "Cashin";
     actionMoneyEl.textContent = cashinAmountEl.value;
+    clearInterval(timerLogOut);
+    timerLogOut = logOutTimer();
   }
   if (cashinUserNameEl.value !== currentUser.userName) {
     cashinUserNameEl.classList.add("error");
@@ -390,6 +392,8 @@ sendMoneyBtnEl.addEventListener("click", function (e) {
     actionMsgEl.classList.remove("hidden");
     actionTypeEl.textContent = "Send Money";
     actionMoneyEl.textContent = sendMoneyAmountEl.value;
+    clearInterval(timerLogOut);
+    timerLogOut = logOutTimer();
   }
   if (!reciverAcc || reciverAcc === currentUser) {
     sendMoneyUserNameEl.classList.add("error");
@@ -429,5 +433,23 @@ sortTransactionBtnEl.addEventListener("click", function () {
   sorted = !sorted;
 });
 
-// Todos
-// 2. Rewatch timer lecture and implement it on the project
+// Timer
+// Selector
+const timerEl = document.querySelector(".timer");
+const logOutTimer = function () {
+  let time = 30;
+  const tick = function () {
+    let min = String(Math.trunc(time / 60)).padStart(2, 0);
+    let sec = String(time % 60).padStart(2, 0);
+    timerEl.textContent = `${min}:${sec}`;
+    if (time === 0) {
+      clearInterval(timer);
+      warningMsgEl.classList.remove("hidden");
+      appEl.classList.add("hidden");
+    }
+    time--;
+  };
+  tick();
+  const timer = setInterval(tick, 1000);
+  return timer;
+};
