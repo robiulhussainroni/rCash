@@ -12,7 +12,11 @@
 - User can cash out through an Agent
 - User can send money to other users
 - User can see his transactions and Balance
-- After 10 minutes, if there are no activity user will automatically log out
+- After 2 minutes, if there are no activity user will automatically log out
+
+#### User :
+- Agent : username : MT ||  Pin : 3333
+- Non Agent : username : OB || pin : 2222, username : SM || pin : 1111
 
 #### Note : This is for practicing JavaScript, so no real life data will be used and all the things including login will be fake. Again This is just a practice project, so don't look for clean code, architecture, design pattern or any kinds of framework
 
@@ -38,4 +42,9 @@ DD/MM/YY
 - 09/12/2025 - Fixed a bug where If I login with the agent account the cashout section removed from other normal accounts too but I wanted it to just removed for the agent account, as there are just one agent account on my application + started working on sorting the transaction but couldn't make it
 - 17/12/2025 - After a long period of time I'm back working on this project. After a few failed attempt I finally can add the sorting functionality on the app.
 - 18/12/2025 - There were some tiny responsive issues and today I solved them. While solving responsive issue I figure out a problem - when user enter login button in mobile view the login screen don't disappear even after the credentials are correct, user have to manually click the close button, not sure whether I'd work on it, but maybe while polishing the app, I'd try to give it a go. + The problem that I saw on login in mobile view I fixed it, also add error sign for falase credential in login form, there are some responsive issues happened for previous code and I solved them. + There were a bug on login input error, I solved it using array's some method. + Wanted to add Intl formatting but witness few awkward bugs, solved few but few of them still remained and it's midnight. I'm feeling sleepy, so I git restore the formatting code.
-- 19/12/2025 - Worked on formatting dates and currency based on user locale and currency. + Added the timer functionality on the app and finally the project is completed. Now, only optimizing the code remained.
+- 19/12/2025 - Worked on formatting dates and currency based on user locale and currency. + Added the timer functionality on the app and finally the project is completed. Now, only optimizing the code remained. + And finally after long time I've finished the application. For the final polishment, I work on refactoring the codebase. Try to follow DRY principles as much as I can and also divide the bigger functions into multiple smaller functions, and try to add meaningful comment.
+
+# Possible Improvements :
+- Could add many other features
+- Could add little more animations
+- Could add localstorage
